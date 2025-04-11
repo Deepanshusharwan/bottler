@@ -47,16 +47,16 @@ def fetch_horoscope(message, sign):
     day = message.text
     horoscope = get_daily_horoscope(sign, day)
     data = horoscope["data"]
-    horoscope_message = f'*Horoscope:* {data["horoscope_data"]}\n*Sign:* {sign}\sn*Day:* {data["date"]}'
+    horoscope_message = f'*Horoscope:* {data["horoscope_data"]}\n*Sign:* {sign}\n*Day:* {data["date"]}'
     bot.send_message(message.chat.id, "Here's your horoscope!")
     bot.send_message(message.chat.id, horoscope_message, parse_mode="Markdown")
 
 
-ilu_commands = ['i love you',
-                'i luv u',
-                'i lub u',
-                'i lob you',
-                'i lob u',
+ilu_commands = ['iloveyou',
+                'iluvu',
+                'ilubu',
+                'ilobyou',
+                'ilobu',
                 ]
 @bot.message_handler(commands=[m for m in ilu_commands]+[m.upper() for m in ilu_commands]+[f'{m.upper()} ❤' for m in ilu_commands] + [f'{m} ❤' for m in ilu_commands])
 def ilu_handler(message):
