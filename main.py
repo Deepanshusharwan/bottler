@@ -60,7 +60,21 @@ ilu_commands = ['iloveyou',
                 ]
 @bot.message_handler(commands=[m for m in ilu_commands]+[m.upper() for m in ilu_commands]+[f'{m.upper()} ❤' for m in ilu_commands] + [f'{m} ❤' for m in ilu_commands])
 def ilu_handler(message):
-    bot.reply_to(message,f'{message.text} too ')
+    bot.reply_to(message,f'{message.text}too ❤')
+
+
+
+
+ilum_commands = ['iloveyoumore',
+                'iluvumore',
+                'ilubumore',
+                'ilobyoumore',
+                'ilobumor',
+                ]
+@bot.message_handler(commands=[f"no{m}" for m in ilum_commands]+[m.upper() for m in ilum_commands]+[f'{m.upper()} ❤' for m in ilum_commands] + [f'{m} ❤' for m in ilum_commands]+[m for m in ilum_commands])
+def ilu_handler(message):
+    bot.reply_to(message,f'no{message.text} ❤')
+
 
 @bot.message_handler(func=lambda msg:True)
 def echo(message):
