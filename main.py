@@ -10,7 +10,20 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=["start","hello"])
 def send_welcome(message):
-    bot.reply_to(message,f"Hello {message.from_user.first_name} nice to meet you! how are you?")
+    bot.reply_to(message,f"Woof woof! Very good, {message.from_user.first_name}! Bottler the loyal dog butler at your service. 🐾 May I fetch you a biscuit… or perhaps assist with a more pressing matter?")
+
+
+
+@bot.message_handler(commands=["pet","pets"])
+def send_welcome(message):
+    bot.reply_to(message,f"Wags tail enthusiastically, ears perk up \nOhhh, most delightful, thank you kindly! 🐶✨ Might I offer you a warm cup of tea… or perhaps chase the mailman for your amusement?")
+
+
+
+@bot.message_handler(commands=["sparkles","sparkle"])
+def send_welcome(message):
+    bot.reply_to(message,f"Snarls softly, but maintains butlerly composure\nAh yes… Sparkle. The ruffian. The rascal. The ruff-ian! 🐾\nHe may wear a bowtie, but does he polish the silverware with his tail fluff like I do? I think not. Hmph. One day, Sparkle shall feel the full might of my impeccably trained manners and passive-aggressive sniffing. Until then… I wait. 🐶 🕯️ \nShall I proceed with your next request, kind human?")
+
 
 
 @bot.message_handler(commands=['horoscope'])
