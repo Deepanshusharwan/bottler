@@ -2,9 +2,12 @@ import os
 import telebot
 import requests
 import datetime
+import openai
 
-
+KEY = os.environ.get("KEY")
+print(KEY)
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+print(BOT_TOKEN)
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
@@ -87,6 +90,9 @@ ilum_commands = ['iloveyoumore',
 @bot.message_handler(commands=[f"no{m}" for m in ilum_commands]+[m.upper() for m in ilum_commands]+[f'{m.upper()} ❤' for m in ilum_commands] + [f'{m} ❤' for m in ilum_commands]+[m for m in ilum_commands])
 def ilu_handler(message):
     bot.reply_to(message,f'no{message.text} ❤')
+
+
+
 
 
 @bot.message_handler(func=lambda msg:True)
