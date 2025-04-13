@@ -3,11 +3,11 @@ import telebot
 import requests
 import datetime
 import openai
+from keys import key
 
-KEY = os.environ.get("KEY")
-print(KEY)
+
+AI_KEY = os.environ.get("AI_KEY")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
-print(BOT_TOKEN)
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
