@@ -1,0 +1,11 @@
+[project]
+name = "bottler"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "datetime>=5.5",
+    "openai>=1.79.0",
+    "telebot>=0.0.5",
+]
