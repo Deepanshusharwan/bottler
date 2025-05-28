@@ -19,7 +19,7 @@ def send_welcome(message):
 
 
 @bot.message_handler(commands=["pet","pets"])
-def send_welcome(message):
+def pet(message):
     bot.reply_to(message,"Wags tail enthusiastically, ears perk up \nOhhh, most delightful, thank you kindly! 🐶✨ Might I offer you a warm cup of tea… or perhaps chase the mailman for your amusement?")
  
 
@@ -103,7 +103,7 @@ def gemini_response(message):
         ),
         contents=message.text
     )
-    print(f"date:{datetime.now()}\nuser: {message.from_user} \ninput_text: {message.text} \nresponse: {response.text}")
+    print(f"date:{datetime.now()}\nuser: {message.from_user.first_name} \ninput_text: {message.text} \nresponse: {response.text}")
 
     bot.reply_to(message,response.text)
 
