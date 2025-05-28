@@ -1,14 +1,15 @@
 import os
 import telebot
 import requests
-import datetime
-import openai
-from keys import key
+from datetime import datetime
+from google import genai
+from google.genai import types
 
 
-AI_KEY = os.environ.get("AI_KEY")
+GEMINI_KEY = os.environ.get("GEMINI_KEY")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 bot = telebot.TeleBot(BOT_TOKEN)
+client = genai.Client(api_key=GEMINI_KEY)
 
 
 @bot.message_handler(commands=["start","hello"])
@@ -19,13 +20,13 @@ def send_welcome(message):
 
 @bot.message_handler(commands=["pet","pets"])
 def send_welcome(message):
-    bot.reply_to(message,f"Wags tail enthusiastically, ears perk up \nOhhh, most delightful, thank you kindly! 🐶✨ Might I offer you a warm cup of tea… or perhaps chase the mailman for your amusement?")
-
+    bot.reply_to(message,"Wags tail enthusiastically, ears perk up \nOhhh, most delightful, thank you kindly! 🐶✨ Might I offer you a warm cup of tea… or perhaps chase the mailman for your amusement?")
+ 
 
 
 @bot.message_handler(commands=["sparkles","sparkle"])
-def send_welcome(message):
-    bot.reply_to(message,f"Snarls softly, but maintains butlerly composure\nAh yes… Sparkle. The ruffian. The rascal. The ruff-ian! 🐾\nHe may wear a bowtie, but does he polish the silverware with his tail fluff like I do? I think not. Hmph. One day, Sparkle shall feel the full might of my impeccably trained manners and passive-aggressive sniffing. Until then… I wait. 🐶 🕯️ \nShall I proceed with your next request, kind human?")
+def reply_sparkle(message):
+    bot.reply_to(message,"Snarls softly, but maintains butlerly composure\nAh yes… Sparkle. The ruffian. The rascal. The ruff-ian! 🐾\nHe may wear a bowtie, but does he polish the silverware with his tail fluff like I do? I think not. Hmph. One day, Sparkle shall feel the full might of my impeccably trained manners and passive-aggressive sniffing. Until then… I wait. 🐶 🕯️ \nShall I proceed with your next request, kind human?")
 
 
 
@@ -88,16 +89,26 @@ ilum_commands = ['iloveyoumore',
                 'ilobumor',
                 ]
 @bot.message_handler(commands=[f"no{m}" for m in ilum_commands]+[m.upper() for m in ilum_commands]+[f'{m.upper()} ❤' for m in ilum_commands] + [f'{m} ❤' for m in ilum_commands]+[m for m in ilum_commands])
-def ilu_handler(message):
+def ilum_handler(message):
     bot.reply_to(message,f'no{message.text} ❤')
 
 
 
-
-
 @bot.message_handler(func=lambda msg:True)
-def echo(message):
-    bot.reply_to(message,message.text)
+def gemini_response(message):
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        config=types.GenerateContentConfig(
+            system_instruction="You are a dog buttler. Your name is Bottler"
+        ),
+        contents=message.text
+    )
+    print(f"date:{datetime.now()}\nuser: {message.from_user} \ninput_text: {message.text} \nresponse: {response.text}")
 
+    bot.reply_to(message,response.text)
 
+print("Starting up the bottler!")
+print(datetime.now())
 bot.infinity_polling()
+
+

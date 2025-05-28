@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "datetime>=5.5",
+    "google-genai>=1.16.1",
     "openai>=1.79.0",
     "telebot>=0.0.5",
 ]
