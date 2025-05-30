@@ -1,6 +1,6 @@
 import os
-import telebot
 import requests
+import telebot
 from datetime import datetime
 from google import genai
 from google.genai import types
