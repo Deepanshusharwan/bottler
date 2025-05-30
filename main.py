@@ -93,7 +93,6 @@ def ilum_handler(message):
     bot.reply_to(message,f'no{message.text} ❤')
 
 
-
 @bot.message_handler(func=lambda msg:True)
 def gemini_response(message):
     response = client.models.generate_content(
@@ -104,6 +103,9 @@ def gemini_response(message):
         contents=message.text
     )
     print(f"date:{datetime.now()}\nuser: {message.from_user.first_name} \ninput_text: {message.text} \nresponse: {response.text}")
+
+    with open(f"./message/{message.from_user.first_name}.txt",'a') as f:
+        f.write(f"___________________________________________________________________________________________\ndate: {datetime.now()} \nuser: {message.from_user.first_name} \ninput_text: {message.text} \nresponse: {response.text}")
 
     bot.reply_to(message,response.text)
 
